@@ -8,6 +8,12 @@ Rails.application.routes.draw do
       resources :sessions, only: %i[index]
     end
 
-    resources :posts, only: [:index, :show, :create, :update, :destroy]
+    resources :posts, only: [:index, :show, :create, :update, :destroy] do
+      collection do
+        get 'blogs', to: 'posts#index_for_blogs'
+        get :index_by_user
+        get :my_posts
+      end
+    end
   end
 end

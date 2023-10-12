@@ -50,3 +50,7 @@ end
 gem "devise"
 gem "devise_token_auth"
 gem 'devise-i18n'
+gem "carrierwave"
+gem "fog-aws"
+gem "dotenv-rails"
+gem 'active_model_serializers'
