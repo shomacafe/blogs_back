@@ -18,12 +18,12 @@ class Api::PostsController < ApplicationController
   end
 
   def show
-    render json: @post, serializer: PostSerializer, include: [:user]
+    render json: @post, serializer: PostSerializer, include: [:user, comments: [:user]]
   end
 
   def update
     if @post.update(post_params)
-      render json: @post, status: :created
+      render json: @post, status: :ok
     else
       render json: @post.errors, status: :unprocessable_entity
     end
