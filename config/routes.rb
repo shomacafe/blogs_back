@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   namespace :api do
+    get 'favorites/index'
+    get 'favorites/create'
+    get 'favorites/destroy'
     get 'comments/create'
     get 'comments/update'
     get 'comments/destroy'
@@ -17,7 +20,13 @@ Rails.application.routes.draw do
         get :index_by_user
         get :my_posts
       end
+      member do
+        post 'favorite', to: 'favorites#create'
+        delete 'unfavorite', to: 'favorites#destroy'
+      end
       resources :comments, only: [:create, :update, :destroy]
     end
+
+    get '/posts/:id/favorite_status', to: 'favorites#favorite_status'
   end
 end
