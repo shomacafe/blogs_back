@@ -1,16 +1,6 @@
 class Api::FavoritesController < ApplicationController
   before_action :authenticate_api_user!, only: [:index, :create, :destroy]
 
-  def index
-  end
-
-  def favorite_status
-    user_id = params[:user_id]
-    post = Post.includes(:favorites).find(params[:id])
-    is_favorite = Favorite.exists?(user_id, post.id)
-    render json: { is_favorite: is_favorite }
-  end
-
   def create
     post = Post.find(params[:post_id])
 
@@ -37,5 +27,20 @@ class Api::FavoritesController < ApplicationController
     else
       render json: { error: 'お気に入りが見つかりません' }, status: :not_found
     end
+  end
+
+  def favorite_posts
+    favorite_post_ids = current_api_user.favorites.pluck(:post_id)
+
+    @favorite_posts = Post.where(id: favorite_post_ids)
+
+    render json: @favorite_posts, status: :ok
+  end
+
+  def favorite_status
+    user_id = params[:user_id]
+    post = Post.includes(:favorites).find(params[:id])
+    is_favorite = Favorite.exists?(user_id, post.id)
+    render json: { is_favorite: is_favorite }
   end
 end
