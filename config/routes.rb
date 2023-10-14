@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   namespace :api do
+    get 'comments/create'
+    get 'comments/update'
+    get 'comments/destroy'
     mount_devise_token_auth_for 'User', at: 'auth', controllers: {
       registrations: 'api/auth/registrations'
     }
@@ -14,6 +17,7 @@ Rails.application.routes.draw do
         get :index_by_user
         get :my_posts
       end
+      resources :comments, only: [:create, :update, :destroy]
     end
   end
 end
