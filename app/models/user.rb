@@ -6,6 +6,12 @@ class User < ActiveRecord::Base
   has_many :favorites, dependent: :destroy
   mount_uploader :image, ImageUploader
 
+  before_validation :set_default_profile
+
+  def set_default_profile
+    self.profile ||= "#{self.name}です。よろしくお願いします。"
+  end
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
