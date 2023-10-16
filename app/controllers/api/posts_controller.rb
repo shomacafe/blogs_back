@@ -35,7 +35,7 @@ class Api::PostsController < ApplicationController
   end
 
   def index_for_blogs
-    @users = User.includes(:posts).all
+    @users = User.joins(:posts).distinct
     render json: @users, include: [:posts]
   end
 

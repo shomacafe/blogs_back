@@ -1,5 +1,5 @@
 class Api::FavoritesController < ApplicationController
-  before_action :authenticate_api_user!, only: [:index, :create, :destroy]
+  before_action :authenticate_api_user!, only: [:index, :create, :destroy, :favorite_posts, :favorite_status]
 
   def create
     post = Post.find(params[:post_id])
