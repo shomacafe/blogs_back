@@ -22,5 +22,11 @@ Rails.application.routes.draw do
       end
       resources :comments, only: [:create, :update, :destroy]
     end
+    resources :users, only: [:show] do
+      collection do
+        put 'profile', to: 'users#update_profile'
+        put 'account', to: 'users#update_account'
+      end
+    end
   end
 end

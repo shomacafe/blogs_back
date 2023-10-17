@@ -25,6 +25,7 @@ module BlogAppBack
     config.api_only = true
 
     config.time_zone = 'Tokyo'
+    config.i18n.default_locale = :ja
 
     config.session_store :cookie_store, key: '_interslice_session'
     config.middleware.use ActionDispatch::Cookies
