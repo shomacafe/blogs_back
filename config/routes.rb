@@ -28,5 +28,7 @@ Rails.application.routes.draw do
         put 'account', to: 'users#update_account'
       end
     end
+
+    get 'hello', to: 'welcome#hello'
   end
 end
