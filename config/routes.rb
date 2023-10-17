@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'welcome#index'
   namespace :api do
     mount_devise_token_auth_for 'User', at: 'auth', controllers: {
       registrations: 'api/auth/registrations'
@@ -28,7 +29,5 @@ Rails.application.routes.draw do
         put 'account', to: 'users#update_account'
       end
     end
-
-    get 'hello', to: 'welcome#hello'
   end
 end
